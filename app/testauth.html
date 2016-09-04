@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>AJAX</h2>
+
+<button type="button" onclick="loadDoc()">Request data here</button>
+
+<p id="demo"></p>
+ 
+<script>
+function loadDoc() {
+  var fd = new FormData();
+  fd.append("username", "matt");
+  fd.append("password", "b");
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "http://localhost:48080/bmsapi/crop/list");
+  //xhttp.open("GET", "http://rest-service.guides.spring.io/greeting")
+  xhttp.setRequestHeader('X-Auth-Token', 'matt:1472985400236:75b27155326fbf856706312f41e37578');  
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>

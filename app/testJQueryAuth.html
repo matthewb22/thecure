@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+</head>
+<body>
+
+<h2>AJAX</h2>
+
+<button type="button" onclick="loadDoc()">Request data here</button>
+<button type="button" onclick="clearDoc()">Clear data here</button>
+
+<p id="demo"></p>
+ 
+<script>
+function loadDoc() {
+  $.ajax({
+      //url: 'http://private-abd9c-brapi.apiary-mock.com/brapi/v1/crops',
+      url: 'http://localhost:48080/bmsapi/crop/list',
+      contentType: 'text/plain',
+      headers: {
+        'X-Auth-Token':'matt:1473050655820:5c161ad4ce405378372dd1cb65feb302',
+        'x-requested-with':'XMLHttpRequest',
+        //'X-Auth-Token':'rachita:1472995006036:6d671803979e12af9f4f64c9f65386f7'
+      },
+    //   data: {
+    //      format: 'json'
+    //   },
+      error: function() {
+         $('#info').html('<p>An error has occurred</p>');
+      },
+      dataType: 'JSON',
+      success: function(data) {
+         var $data = $('<p>').text(data);
+         $('#demo')
+            .append($data)
+      },
+      type: 'GET'
+   });
+
+}
+
+function clearDoc() {
+    document.getElementById('demo').innerHTML = ' ';
+}
+</script>
+
+</body>
+</html>
